@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb  8 09:40:47 2019
+
+@author: Di Shen
+"""
+
+from PIL import Image
+import matplotlib._color_data as mcd
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import numpy as np
+
+xkcd = mcd.XKCD_COLORS
+color = xkcd.values()
+colors=[]
+for key in color:
+    colors.append(key)
+print(len(colors))
+print(colors)
+print(colors[0])
+im = Image.open("IMG.JPG")
+img = np.array(im,dtype=np.uint8) 
+fig,ax = plt.subplots(1,figsize=(12,12))
+ax.axis('off')
+
+rect = patches.Rectangle((300,200),400,600,linewidth=1,edgecolor=colors[1],facecolor='none')
+ax.add_patch(rect)
+ax.text(400, 200, "Didi", size=11, verticalalignment='top',color='w', backgroundcolor="r")
+
+rect = patches.Rectangle((600,100),400,800,linewidth=1,edgecolor='r',facecolor='none')
+ax.add_patch(rect)
+ax.text(800, 100, "Piano", size=11, verticalalignment='top',color='w', backgroundcolor="r")
+
+ax.imshow(img.astype(np.uint8))
+fig.savefig("SAVE NAME")
